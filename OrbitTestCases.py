@@ -531,28 +531,30 @@ if __name__ == '__main__':
     
     plt.close('all')
     
-    run_snc_tuning()
+    # run_snc_tuning()
     
-    # if not os.path.exists('orbit_model'):
-    #     os.makedirs('orbit_model')
+    if not os.path.exists('orbit_model'):
+        os.makedirs('orbit_model')
     
-    # # Setup and Run TwoBody Orbit with Range, RA, DEC measurements
-    # datadir = 'orbit_model'
-    # setup_file = os.path.join(datadir, 'orbit_model_setup_rgradec.pkl')
-    # truth_file = os.path.join(datadir, 'orbit_model_truth.pkl')
-    # meas_file = os.path.join(datadir, 'orbit_model_meas_rgradec.pkl')
-    # output_file = os.path.join(datadir, 'orbit_model_batch_output_rgradec.pkl')
-    # intfcn = Estimators.int_twobody_stm
-    # meas_fcn = Estimators.H_rgradec
+    # Setup and Run TwoBody Orbit with Range, RA, DEC measurements
+    datadir = 'orbit_model'
+    setup_file = os.path.join(datadir, 'orbit_model_setup_rgradec.pkl')
+    truth_file = os.path.join(datadir, 'orbit_model_truth.pkl')
+    meas_file = os.path.join(datadir, 'orbit_model_meas_rgradec.pkl')
+    output_file = os.path.join(datadir, 'orbit_model_batch_output_rgradec.pkl')
+    intfcn = Estimators.int_twobody
+    meas_fcn = Estimators.H_rgradec
     
-    # # Batch estimator
-    # generate_orbit_inputs(setup_file, 3)
-    # generate_orbit_truth(setup_file, truth_file)
-    # generate_orbit_meas(setup_file, truth_file, meas_file)
+    # Batch estimator
+    generate_orbit_inputs(setup_file, 3)
+    generate_orbit_truth(setup_file, truth_file, intfcn)
+    generate_orbit_meas(setup_file, truth_file, meas_file)
     
-    # run_estimator_orbit_model(setup_file, truth_file, meas_file, output_file,
-    #                           intfcn, meas_fcn, 'batch')
-    # compute_orbit_errors(setup_file, truth_file, output_file)
+    
+    intfcn = Estimators.int_twobody_stm
+    run_estimator_orbit_model(setup_file, truth_file, meas_file, output_file,
+                              intfcn, meas_fcn, 'batch')
+    compute_orbit_errors(setup_file, truth_file, output_file)
     
     # # UKF
     # output_file = os.path.join(datadir, 'orbit_model_ukf_output_rgradec.pkl')
@@ -565,23 +567,25 @@ if __name__ == '__main__':
     
     
     
-    # # Setup and Run TwoBody Orbit with only RA, DEC measurements
-    # datadir = 'orbit_model'
-    # setup_file = os.path.join(datadir, 'orbit_model_setup_radec.pkl')
-    # truth_file = os.path.join(datadir, 'orbit_model_truth.pkl')
-    # meas_file = os.path.join(datadir, 'orbit_model_meas_radec.pkl')
-    # output_file = os.path.join(datadir, 'orbit_model_batch_output_radec.pkl')
-    # intfcn = Estimators.int_twobody_stm
-    # meas_fcn = Estimators.H_radec
+    # Setup and Run TwoBody Orbit with only RA, DEC measurements
+    datadir = 'orbit_model'
+    setup_file = os.path.join(datadir, 'orbit_model_setup_radec.pkl')
+    truth_file = os.path.join(datadir, 'orbit_model_truth.pkl')
+    meas_file = os.path.join(datadir, 'orbit_model_meas_radec.pkl')
+    output_file = os.path.join(datadir, 'orbit_model_batch_output_radec.pkl')
+    intfcn = Estimators.int_twobody
+    meas_fcn = Estimators.H_radec
     
-    # # Batch
-    # generate_orbit_inputs(setup_file, 2)
-    # generate_orbit_truth(setup_file, truth_file)
-    # generate_orbit_meas(setup_file, truth_file, meas_file)
+    # Batch
+    generate_orbit_inputs(setup_file, 2)
+    generate_orbit_truth(setup_file, truth_file, intfcn)
+    generate_orbit_meas(setup_file, truth_file, meas_file)
     
-    # run_estimator_orbit_model(setup_file, truth_file, meas_file, output_file,
-    #                           intfcn, meas_fcn, 'batch')
-    # compute_orbit_errors(setup_file, truth_file, output_file)
+    
+    intfcn = Estimators.int_twobody_stm
+    run_estimator_orbit_model(setup_file, truth_file, meas_file, output_file,
+                              intfcn, meas_fcn, 'batch')
+    compute_orbit_errors(setup_file, truth_file, output_file)
     
     # # UKF
     # output_file = os.path.join(datadir, 'orbit_model_ukf_output_radec.pkl')
